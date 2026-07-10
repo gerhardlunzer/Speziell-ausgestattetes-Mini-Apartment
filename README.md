@@ -1,0 +1,1 @@
+# Speziell-ausgestattetes-Mini-Apartment
