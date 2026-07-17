@@ -22,17 +22,20 @@
 
 <div class="bottom-bar">
 
-    <a href="tel:+4369981809105">
+    <a id="bottomPhone"
+   href="#">
         <i class="fa-solid fa-phone"></i>
         <span>Anrufen</span>
     </a>
 
-    <a href="https://wa.me/4369981809105" target="_blank">
+    <a id="bottomWhatsapp"
+   href="#" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
         <span>WhatsApp</span>
     </a>
 
-    <a href="https://maps.google.com" target="_blank">
+    <a id="mapsButton"
+   href="#" target="_blank">
         <i class="fa-solid fa-location-dot"></i>
         <span>Navigation</span>
     </a>
@@ -51,13 +54,15 @@
 
         <div class="buttons">
 
-            <a class="button phone"
-               href="tel:+4369981809105">
+            <a id="phoneButton"
+   class="button phone"
+   href="#">
                📞 Jetzt anrufen
             </a>
 
-            <a class="button whatsapp"
-               href="https://wa.me/4369981809105"
+            <a id="whatsappButton"
+   class="button whatsapp"
+   href="#"
                target="_blank">
                💬 WhatsApp
             </a>
@@ -70,7 +75,7 @@
 
 <main>
 
-<section class="wohnen">
+<section class="wohnen fade">
 
     <div class="container">
 
@@ -99,7 +104,7 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
 </section>
 
-<section class="galerie">
+<section class="galerie fade">
 
     <div class="container">
 
@@ -117,7 +122,7 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
 </section>
 
-<section class="anreise">
+<section class="anreise fade">
 
     <div class="container">
 
@@ -133,19 +138,20 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
         </div>
 
-        <a class="button navigation"
-           href="https://maps.google.com"
-           target="_blank">
+        <a id="navigationButton"
+   class="button navigation"
+   href="#"
+   target="_blank">
 
-           🧭 Navigation starten
+   🧭 Navigation starten
 
-        </a>
+</a>
 
     </div>
 
 </section>
 
-<section class="calendar-section">
+<section class="calendar-section fade">
 
     <div class="container">
 
@@ -164,24 +170,15 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
 </section>
 
-<section class="kontakt">
+<section class="kontakt fade">
 
     <div class="container">
 
         <h2>Kontakt</h2>
 
-        <p>
+        <p id="addressText"></p>
 
-📍 Stauseestraße 120<br>
-7212 Forchtenstein
-
-        </p>
-
-        <p>
-
-📞 +43 699 81809105
-
-        </p>
+<p id="phoneText"></p>
 
     </div>
 

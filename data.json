@@ -1,5 +1,10 @@
 {
   "config": {
-    "title": "Speziell ausgestattetes Mini-Apartment"
+    "title": "Speziell ausgestattetes Mini-Apartment",
+    "version": "1.0",
+    "phone": "+4369981809105",
+    "whatsapp": "4369981809105",
+    "address": "Stauseestraße 120, 7212 Forchtenstein",
+    "maps": "https://maps.google.com"
   }
 }

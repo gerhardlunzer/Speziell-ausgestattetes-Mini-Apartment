@@ -18,6 +18,9 @@ body{
 /* ---------------- HERO ---------------- */
 
 .hero{
+    overflow:hidden;
+
+position:relative;
 
     min-height:100vh;
 
@@ -55,6 +58,10 @@ body{
 
     margin-bottom:20px;
 
+    text-shadow:0 3px 12px rgba(0,0,0,.45);
+
+letter-spacing:.5px;
+
 }
 
 .slogan{
@@ -64,6 +71,12 @@ body{
     margin-bottom:40px;
 
     letter-spacing:2px;
+
+    letter-spacing:2px;
+
+text-transform:uppercase;
+
+opacity:.92;
 
 }
 
@@ -125,13 +138,19 @@ body{
 
     box-shadow:0 10px 25px rgba(0,0,0,.25);
 
+    transform:translateY(-3px);
+
+box-shadow:0 12px 24px rgba(0,0,0,.18);
+
+transition:.3s;
+
 }
 
 /* ---------------- Allgemein ---------------- */
 
 .container{
 
-    width:min(1100px,90%);
+    width:min(1200px,90%);
 
     margin:auto;
 
@@ -163,6 +182,12 @@ h2{
 
     color:#2f5e48;
 
+    letter-spacing:.5px;
+
+margin-bottom:30px;
+
+color:#2f5e48;
+
 }
 
 .wohnen img{
@@ -184,6 +209,10 @@ h2{
 .wohnen p{
 
     font-size:1.05rem;
+
+    line-height:1.8;
+
+color:#444;
 
 }
 
@@ -280,6 +309,8 @@ footer{
 }
 .gallery-grid{
 
+    gap:18px;
+
 display:grid;
 
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -292,17 +323,38 @@ margin-bottom:50px;
 
 .gallery-grid img{
 
-width:100%;
+    width:100%;
 
-height:220px;
+    display:block;
 
-object-fit:cover;
+    border-radius:16px;
 
-border-radius:15px;
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        filter .35s ease;
 
-cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
 
-transition:.3s;
+}
+
+.gallery-grid a{
+
+    display:block;
+
+    overflow:hidden;
+
+    border-radius:16px;
+
+}
+
+.gallery-grid a:hover img{
+
+    transform:scale(1.04);
+
+    filter:brightness(1.04);
+
+    box-shadow:0 16px 35px rgba(0,0,0,.22);
 
 }
 
@@ -525,5 +577,55 @@ body{
     .fc .fc-toolbar-title{
         font-size:1.2rem;
     }
+
+}
+
+/* ---------- Hero Animation ---------- */
+
+.hero{
+
+    animation: heroZoom 18s ease-in-out infinite alternate;
+
+}
+
+@keyframes heroZoom{
+
+    from{
+
+        background-size:100%;
+
+    }
+
+    to{
+
+        background-size:108%;
+
+    }
+
+}
+
+/* ---------- Fade In ---------- */
+
+.fade{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:all .8s ease;
+
+}
+
+.fade.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+html{
+
+    scroll-behavior:smooth;
 
 }
