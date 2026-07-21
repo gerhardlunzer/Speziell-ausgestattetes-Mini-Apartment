@@ -1,49 +1,68 @@
-const apartmentFotos = [
-    "a01",
-    "a02",
-    "a03",
-    "a04"
-];
+async function init() {
 
-const outsideFotos = [
-    "o01",
-    "o02",
-    "o03",
-    "o04"
-];
+    const daten = await fetch("data.json");
 
-const apartmentGallery = document.getElementById("apartmentGallery");
-const outsideGallery = document.getElementById("outsideGallery");
+    const data = await daten.json();
 
-function galerieErzeugen(container, bilder) {
+    const galerieDatei = await fetch("gallery.json");
+    
+    const gallery = await galerieDatei.json();
+    
+    document.getElementById("title").textContent = data.config.title;
 
-    bilder.forEach(datei => {
+document.getElementById("nameText").textContent =
+    "Ihr Ansprechpartner: " + data.config.name;
 
-        container.innerHTML += `
+    document.getElementById("addressText").textContent =
+        data.config.address;
+
+    document.getElementById("phoneText").textContent =
+        data.config.phone;
+
+    document.getElementById("phoneButton").href =
+        "tel:" + data.config.phone;
+
+    document.getElementById("bottomPhone").href =
+        "tel:" + data.config.phone;
+
+    document.getElementById("whatsappButton").href =
+        "https://wa.me/" + data.config.whatsapp;
+
+    document.getElementById("bottomWhatsapp").href =
+        "https://wa.me/" + data.config.whatsapp;
+
+    document.getElementById("navigationButton").href =
+        data.config.maps;
+
+    document.getElementById("mapsButton").href =
+        data.config.maps;
+
+    function galerieErzeugen(containerId, bilder) {
+
+        const container = document.getElementById(containerId);
+
+        bilder.forEach(datei => {
+
+            container.innerHTML += `
 <a href="images/${datei}.jpg" class="glightbox">
-    <img src="thumbs/${datei}.jpg"
-         loading="lazy"
-         alt="">
-</a>
-`;
+    <img src="thumbs/${datei}.jpg" loading="lazy" alt="">
+</a>`;
 
+        });
+
+    }
+
+    galerieErzeugen("apartmentGallery", gallery.apartment);
+        galerieErzeugen("outsideGallery", gallery.outside);
+   
+    GLightbox({
+        touchNavigation: true,
+        loop: true,
+        zoomable: true
     });
-
-}
-
-galerieErzeugen(apartmentGallery, apartmentFotos);
-galerieErzeugen(outsideGallery, outsideFotos);
-
-GLightbox({
-    touchNavigation: true,
-    loop: true,
-    zoomable: true
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-
+    
     const calendarEl = document.getElementById("calendar");
-
+    
     const calendar = new FullCalendar.Calendar(calendarEl, {
 
         initialView: "dayGridMonth",
@@ -70,10 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
         ]
 
     });
-
+    
     calendar.render();
-
+    
     const toggle = document.querySelector(".calendar-toggle");
+    
     const wrapper = document.querySelector(".calendar-wrapper");
 
     toggle.addEventListener("click", function () {
@@ -96,4 +116,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+}
+
+// Fade-In beim Scrollen
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+
+    });
+
 });
+
+document.querySelectorAll(".fade").forEach(section => {
+    observer.observe(section);
+});
+
+init().catch(console.error);
