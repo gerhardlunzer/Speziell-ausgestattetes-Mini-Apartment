@@ -66,21 +66,15 @@ document.getElementById("nameText").textContent =
 
 const counter = document.createElement("div");
 
-counter.className = "glightbox-counter";
+function updateCounter() {
 
-document.body.appendChild(counter);
+    const current = lightbox.index + 1;
 
-lightbox.on("open", () => {
+    const total = lightbox.getElements().length;
 
-    updateCounter();
+    counter.textContent = `${current} / ${total}`;
 
-});
-
-lightbox.on("slide_changed", () => {
-
-    updateCounter();
-
-});
+}
 
 lightbox.on("close", () => {
 
