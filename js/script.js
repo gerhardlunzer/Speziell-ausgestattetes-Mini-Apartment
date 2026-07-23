@@ -37,30 +37,70 @@ document.getElementById("nameText").textContent =
     document.getElementById("mapsButton").href =
         data.config.maps;
 
-    function galerieErzeugen(containerId, bilder) {
+ function galerieErzeugen(containerId, bilder) {
 
-        const container = document.getElementById(containerId);
+    const container = document.getElementById(containerId);
 
-        bilder.forEach(datei => {
+    bilder.forEach((datei, index) => {
 
-            container.innerHTML += `
-<a href="images/${datei}.jpg" class="glightbox">
-    <img src="thumbs/${datei}.jpg" loading="lazy" alt="">
+        container.innerHTML += `
+<a href="images/${datei}.jpg"
+   class="glightbox"
+   data-gallery="${containerId}"
+   ${index >= 4 ? 'style="display:none"' : ''}>
+    <img src="thumbs/${datei}.jpg" loading="lazy">
 </a>`;
 
-        });
+    });
 
-    }
+}
 
     galerieErzeugen("apartmentGallery", gallery.apartment);
         galerieErzeugen("outsideGallery", gallery.outside);
    
-    GLightbox({
-        touchNavigation: true,
-        loop: true,
-        zoomable: true
-    });
-    
+    const lightbox = GLightbox({
+    touchNavigation: true,
+    loop: true,
+    zoomable: true
+});
+
+const counter = document.createElement("div");
+
+counter.className = "glightbox-counter";
+
+document.body.appendChild(counter);
+
+lightbox.on("open", () => {
+
+    updateCounter();
+
+});
+
+lightbox.on("slide_changed", () => {
+
+    updateCounter();
+
+});
+
+lightbox.on("close", () => {
+
+    counter.textContent = "";
+
+});
+
+function updateCounter() {
+
+    const current =
+        lightbox.getActiveSlideIndex() + 1;
+
+    const total =
+        lightbox.getElements().length;
+
+    counter.textContent =
+        `${current} / ${total}`;
+
+}
+
     const calendarEl = document.getElementById("calendar");
     
     const calendar = new FullCalendar.Calendar(calendarEl, {
