@@ -66,34 +66,31 @@ document.getElementById("nameText").textContent =
 
 const counter = document.createElement("div");
 
-function updateCounter() {
+counter.className = "my-counter";
 
-    const current = lightbox.index + 1;
+document.body.appendChild(counter);
 
-    const total = lightbox.getElements().length;
+lightbox.on("slide_changed", ({ current }) => {
 
-    counter.textContent = `${current} / ${total}`;
+    const total = document.querySelectorAll(".glightbox").length;
 
-}
+    counter.textContent = `${current.slideIndex + 1} / ${total}`;
+
+});
+
+lightbox.on("open", () => {
+
+    const total = document.querySelectorAll(".glightbox").length;
+
+    counter.textContent = `1 / ${total}`;
+
+});
 
 lightbox.on("close", () => {
 
     counter.textContent = "";
 
 });
-
-function updateCounter() {
-
-    const current =
-        lightbox.getActiveSlideIndex() + 1;
-
-    const total =
-        lightbox.getElements().length;
-
-    counter.textContent =
-        `${current} / ${total}`;
-
-}
 
     const calendarEl = document.getElementById("calendar");
     
@@ -170,3 +167,6 @@ document.querySelectorAll(".fade").forEach(section => {
 });
 
 init().catch(console.error);
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();

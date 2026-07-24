@@ -900,7 +900,7 @@ footer p{
 
 }
 
-.glightbox-counter{
+.my-counter{
 
     position:fixed;
 
@@ -922,5 +922,197 @@ footer p{
     border-radius:20px;
 
     backdrop-filter:blur(5px);
+
+}
+
+/* ---------- Highlights ---------- */
+
+.highlights{
+
+    padding:70px 0;
+
+    background:#f8faf8;
+
+}
+
+.highlights .container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:28px;
+
+}
+
+.highlight-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.highlight-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+
+}
+
+.highlight-card i{
+
+    font-size:3rem;
+
+    color:#c8a24b;
+
+    margin-bottom:20px;
+
+}
+
+.highlight-card h3{
+
+    color:#2f5e48;
+
+    margin-bottom:12px;
+
+}
+
+.highlight-card p{
+
+    color:#666;
+
+    line-height:1.6;
+
+    font-size:.95rem;
+
+}
+
+/* ---------- Highlight-Animation ---------- */
+
+.highlight-card{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    animation:cardFade .8s ease forwards;
+
+}
+
+.highlight-card:nth-child(1){
+
+    animation-delay:.2s;
+
+}
+
+.highlight-card:nth-child(2){
+
+    animation-delay:.4s;
+
+}
+
+.highlight-card:nth-child(3){
+
+    animation-delay:.6s;
+
+}
+
+.highlight-card:nth-child(4){
+
+    animation-delay:.8s;
+
+}
+
+@keyframes cardFade{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ---------- Begrüßung ---------- */
+
+.welcome{
+
+    background:#ffffff;
+
+    padding:55px 0 25px;
+
+    text-align:center;
+
+}
+
+.welcome h2{
+
+    color:#2f5e48;
+
+    font-size:2rem;
+
+    margin-bottom:18px;
+
+}
+
+.welcome p{
+
+    max-width:760px;
+
+    margin:auto;
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+
+    color:#555;
+
+}
+
+.footer-message{
+
+    margin-top:40px;
+
+    text-align:center;
+
+    font-style:italic;
+
+    color:#d8e5dc;
+
+    font-size:1.05rem;
+
+    letter-spacing:.3px;
+
+}
+
+<p>
+    © <span id="year"></span> Speziell ausgestattetes Mini-Apartment
+</p>
+
+.welcome-divider{
+
+    max-width:760px;
+
+    margin:auto;
+
+    margin-bottom:40px;
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+
+    color:#555;
 
 }
