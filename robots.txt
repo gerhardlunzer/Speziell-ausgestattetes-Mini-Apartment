@@ -1,0 +1,5 @@
+User-agent: *
+
+Allow: /
+
+Sitemap: https://gerhardlunzer.github.io/Speziell-ausgestattetes-Mini-Apartment/sitemap.xml
