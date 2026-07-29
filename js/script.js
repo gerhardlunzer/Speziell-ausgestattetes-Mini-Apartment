@@ -48,11 +48,15 @@ document.getElementById("nameText").textContent =
    class="glightbox"
    data-gallery="${containerId}"
    ${index >= 4 ? 'style="display:none"' : ''}>
-    <img src="thumbs/${datei}.jpg" loading="lazy">
+    <img
+        src="thumbs/${datei}.jpg"
+        alt="${containerId === 'apartment-gallery'
+            ? 'Einblick in das Mini-Apartment in Forchtenstein'
+            : 'Außenbereich, Gästegarten und Natur rund um das Mini-Apartment in Forchtenstein'}"
+        loading="lazy">
 </a>`;
 
     });
-
 }
 
     galerieErzeugen("apartmentGallery", gallery.apartment);
