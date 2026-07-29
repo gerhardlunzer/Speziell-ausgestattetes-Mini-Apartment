@@ -963,14 +963,12 @@ footer p{
 }
 
 .highlight-card i{
-
     font-size:3rem;
-
     color:#c8a24b;
-
-    margin-bottom:20px;
-
+    margin-bottom:12px;
 }
+<div class="highlight-card">
+
 
 .highlight-card h3{
 
@@ -1108,4 +1106,67 @@ footer p{
 
     color:#555;
 
+}
+/* Badesee & Rosaliengebirge – Berg + See */
+
+.landschaft-icon{
+    position:relative;
+    display:block;
+
+    width:70px;
+    height:55px;
+
+    /* Symbol etwas tiefer, Text näher heran */
+    margin:6px auto 12px;
+}
+
+.landschaft-icon i{
+    position:absolute;
+
+    margin:0 !important;
+
+    line-height:1;
+
+    color:#c8a24b;
+}
+
+/* Berg */
+
+.landschaft-icon .bg-hills{
+    top:0;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:2.4rem;
+}
+
+/* See */
+
+.landschaft-icon .fg-lake{
+    left:50%;
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    font-size:1.7rem;
+}
+
+/* Gesamten Inhalt der Badesee-Karte etwas nach oben verschieben */
+
+.landschaft-icon{
+    transform:translateY(-10px);
+}
+
+.landschaft-icon + h3,
+.landschaft-icon + h3 + p{
+    position:relative;
+
+    top:-13px;
+}
+.landschaft-icon + h3 + p{
+    margin-top:8px;
+}
+.landschaft-icon + h3{
+    line-height:1.15;
 }
