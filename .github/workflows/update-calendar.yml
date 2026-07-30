@@ -1,0 +1,69 @@
+name: Verfügbarkeit aktualisieren
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: availability-update
+  cancel-in-progress: true
+
+jobs:
+  update-calendar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Airbnb-Kalender herunterladen
+        env:
+          AIRBNB_ICAL_URL: ${{ secrets.AIRBNB_ICAL_URL }}
+        run: |
+          if [ -z "$AIRBNB_ICAL_URL" ]; then
+            echo "Das Secret AIRBNB_ICAL_URL fehlt."
+            exit 1
+          fi
+
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --location \
+            "$AIRBNB_ICAL_URL" \
+            --output /tmp/airbnb-calendar.ics
+
+          if ! grep -q "BEGIN:VCALENDAR" /tmp/airbnb-calendar.ics; then
+            echo "Die heruntergeladene Datei ist kein gültiger Kalender."
+            exit 1
+          fi
+
+      - name: Verfügbarkeitsdatei erzeugen
+        run: |
+          python scripts/update_availability.py \
+            /tmp/airbnb-calendar.ics \
+            data/availability.json
+
+      - name: Änderungen speichern
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/availability.json
+
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen an der Verfügbarkeit."
+          else
+            git commit -m "Verfügbarkeit automatisch aktualisiert"
+            git push
+          fi
