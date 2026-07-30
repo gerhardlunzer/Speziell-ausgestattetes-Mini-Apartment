@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link rel="icon" type="image/png" href="favicon.png">
 <title>Buchungsinformationen | Speziell ausgestattetes Mini-Apartment</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +28,49 @@
 </header>
 
 <main class="container info-page">
+
+<section class="availability-section">
+
+    <h2>Verfügbarkeit prüfen</h2>
+
+    <p class="availability-intro">
+        Prüfen Sie hier, ob Ihr gewünschter Aufenthaltszeitraum
+        voraussichtlich noch verfügbar ist.
+    </p>
+
+    <div class="availability-legend">
+
+        <span>
+            <span class="availability-dot available"></span>
+            Frei
+        </span>
+
+        <span>
+            <span class="availability-dot occupied"></span>
+            Bereits belegt
+        </span>
+
+    </div>
+
+    <div id="booking-calendar">
+
+        <p class="calendar-loading">
+            Der Verfügbarkeitskalender wird vorbereitet …
+        </p>
+
+    </div>
+
+    <p class="availability-note">
+
+        Die Verfügbarkeit wird regelmäßig mit den
+        Buchungskalendern abgeglichen.
+        Eine Reservierung wird erst nach persönlicher
+        Bestätigung verbindlich.
+
+    </p>
+
+</section>
+
 <h2>Check-in</h2>
 
 <p>
@@ -162,6 +205,6 @@ stehen wir Ihnen gerne telefonisch oder per E-Mail zur Verfügung.
 </p>
 
 </main>
-
+<script src="js/booking-calendar.js"></script>
 </body>
 </html>

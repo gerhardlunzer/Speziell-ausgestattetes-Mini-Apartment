@@ -1170,3 +1170,123 @@ footer p{
 .landschaft-icon + h3{
     line-height:1.15;
 }
+
+/* Verfügbarkeitsbereich */
+
+.availability-section{
+
+    margin:0 0 45px;
+
+    padding:28px 24px;
+
+    border:1px solid rgba(194,155,67,.35);
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.05);
+
+    text-align:center;
+
+}
+
+.availability-section h2{
+
+    margin-top:0;
+
+}
+
+.availability-intro{
+
+    margin:0 auto 20px;
+
+    max-width:650px;
+
+}
+
+.availability-legend{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:25px;
+
+    margin:20px 0;
+
+}
+
+.availability-legend span{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.availability-dot{
+
+    display:inline-block;
+
+    width:13px;
+
+    height:13px;
+
+    border-radius:50%;
+
+}
+
+.availability-dot.available{
+
+    background:#3f9b5f;
+
+}
+
+.availability-dot.occupied{
+
+    background:#c94a4a;
+
+}
+
+#booking-calendar{
+
+    min-height:180px;
+
+    margin:25px auto;
+
+    padding:25px;
+
+    border:1px solid rgba(194,155,67,.25);
+
+    border-radius:10px;
+
+}
+
+.calendar-loading{
+
+    margin:0;
+
+    opacity:.8;
+
+}
+
+.availability-note{
+
+    max-width:720px;
+
+    margin:25px auto 0;
+
+    padding:15px 18px;
+
+    border-radius:8px;
+
+    background:rgba(194,155,67,.10);
+
+    font-size:.95rem;
+
+    line-height:1.6;
+
+}

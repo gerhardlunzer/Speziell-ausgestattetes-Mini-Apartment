@@ -1,0 +1,1 @@
+console.log("TEST: booking-calendar.js wurde geladen");
