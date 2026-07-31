@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 """
-Liest einen Airbnb-iCalendar-Export ein und erzeugt eine öffentliche
+Liest mehrere iCalendar-Dateien ein und erzeugt eine öffentliche
 JSON-Datei mit ausschließlich belegten Datumsbereichen.
 
 Es werden keine Namen, Beschreibungen oder sonstigen Buchungsdetails
-in die JSON-Datei übernommen.
+übernommen.
 """
 
 from __future__ import annotations
@@ -22,13 +22,7 @@ DATE_PATTERN = re.compile(r"^(\d{8})(?:T\d{6}Z?)?$")
 
 
 def unfold_ical_lines(text: str) -> list[str]:
-    """
-    Verbindet gefaltete iCalendar-Zeilen.
-
-    Laut iCalendar-Format kann eine lange Zeile in der nächsten Zeile
-    fortgesetzt werden. Die Folgezeile beginnt dann mit einem Leerzeichen
-    oder Tabulator.
-    """
+    """Verbindet gefaltete iCalendar-Zeilen."""
     raw_lines = (
         text.replace("\r\n", "\n")
         .replace("\r", "\n")
@@ -56,11 +50,8 @@ def extract_property_value(line: str) -> str | None:
 
 def parse_ical_date(line: str) -> str | None:
     """
-    Liest aus DTSTART oder DTEND ein Datum und gibt YYYY-MM-DD zurück.
-
-    Unterstützte Beispiele:
-    DTSTART;VALUE=DATE:20260805
-    DTSTART:20260805T150000Z
+    Liest ein Datum aus DTSTART oder DTEND
+    und gibt YYYY-MM-DD zurück.
     """
     value = extract_property_value(line)
 
@@ -77,7 +68,7 @@ def parse_ical_date(line: str) -> str | None:
 
 
 def parse_event(lines: list[str]) -> dict[str, str] | None:
-    """Extrahiert aus einem VEVENT nur Beginn und exklusives Ende."""
+    """Extrahiert Beginn und exklusives Ende eines VEVENT."""
     start: str | None = None
     end_exclusive: str | None = None
     cancelled = False
@@ -112,8 +103,10 @@ def parse_event(lines: list[str]) -> dict[str, str] | None:
     }
 
 
-def extract_booked_ranges(ical_text: str) -> list[dict[str, str]]:
-    """Liest alle gültigen, nicht stornierten Ereignisse aus dem Kalender."""
+def extract_booked_ranges(
+    ical_text: str,
+) -> list[dict[str, str]]:
+    """Liest alle gültigen Ereignisse aus einem Kalender."""
     lines = unfold_ical_lines(ical_text)
 
     booked: list[dict[str, str]] = []
@@ -141,50 +134,65 @@ def extract_booked_ranges(ical_text: str) -> list[dict[str, str]]:
         if inside_event:
             current_event.append(line)
 
-    booked.sort(
-        key=lambda event: (
-            event["start"],
-            event["endExclusive"],
-        )
-    )
-
-    return remove_duplicates(booked)
+    return booked
 
 
-def remove_duplicates(
-    ranges: list[dict[str, str]],
-) -> list[dict[str, str]]:
-    """Entfernt exakt doppelte Zeiträume."""
-    unique: list[dict[str, str]] = []
-    seen: set[tuple[str, str]] = set()
-
-    for item in ranges:
-        key = (item["start"], item["endExclusive"])
-
-        if key not in seen:
-            seen.add(key)
-            unique.append(item)
-
-    return unique
-
-
-def validate_calendar(text: str) -> None:
-    """Prüft, ob die Eingabe grundsätzlich wie ein Kalender aussieht."""
+def validate_calendar(text: str, path: Path) -> None:
+    """Prüft, ob die Eingabe wie ein iCalendar aussieht."""
     if "BEGIN:VCALENDAR" not in text:
         raise ValueError(
-            "Die Eingabedatei enthält keinen gültigen iCalendar."
+            f"{path} enthält keinen gültigen iCalendar."
         )
 
     if "END:VCALENDAR" not in text:
         raise ValueError(
-            "Der iCalendar ist unvollständig."
+            f"{path} enthält einen unvollständigen iCalendar."
         )
+
+
+def merge_ranges(
+    ranges: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    """
+    Sortiert und vereinigt doppelte, überlappende
+    oder direkt aneinandergrenzende Zeiträume.
+    """
+    if not ranges:
+        return []
+
+    sorted_ranges = sorted(
+        ranges,
+        key=lambda item: (
+            item["start"],
+            item["endExclusive"],
+        ),
+    )
+
+    merged: list[dict[str, str]] = [
+        dict(sorted_ranges[0])
+    ]
+
+    for current in sorted_ranges[1:]:
+        previous = merged[-1]
+
+        if current["start"] <= previous["endExclusive"]:
+            if (
+                current["endExclusive"]
+                > previous["endExclusive"]
+            ):
+                previous["endExclusive"] = (
+                    current["endExclusive"]
+                )
+        else:
+            merged.append(dict(current))
+
+    return merged
 
 
 def build_output(
     booked_ranges: list[dict[str, str]],
 ) -> dict[str, Any]:
-    """Erstellt die öffentliche, datensparsame JSON-Struktur."""
+    """Erstellt die öffentliche JSON-Struktur."""
     updated_at = (
         datetime.now(timezone.utc)
         .replace(microsecond=0)
@@ -199,29 +207,64 @@ def build_output(
 
 
 def main() -> None:
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3:
         raise SystemExit(
             "Verwendung:\n"
             "python scripts/update_availability.py "
-            "<kalender.ics> <availability.json>"
+            "<kalender1.ics> [kalender2.ics ...] "
+            "<availability.json>"
         )
 
-    input_path = Path(sys.argv[1])
-    output_path = Path(sys.argv[2])
+    input_paths = [
+        Path(value)
+        for value in sys.argv[1:-1]
+    ]
 
-    if not input_path.is_file():
-        raise SystemExit(
-            f"Die Eingabedatei wurde nicht gefunden: {input_path}"
-        )
+    output_path = Path(sys.argv[-1])
+
+    all_booked_ranges: list[dict[str, str]] = []
 
     try:
-        ical_text = input_path.read_text(encoding="utf-8-sig")
-        validate_calendar(ical_text)
+        for input_path in input_paths:
+            if not input_path.is_file():
+                raise FileNotFoundError(
+                    f"Kalenderdatei nicht gefunden: "
+                    f"{input_path}"
+                )
 
-        booked_ranges = extract_booked_ranges(ical_text)
-        output = build_output(booked_ranges)
+            ical_text = input_path.read_text(
+                encoding="utf-8-sig"
+            )
 
-        output_path.parent.mkdir(parents=True, exist_ok=True)
+            validate_calendar(
+                ical_text,
+                input_path,
+            )
+
+            ranges = extract_booked_ranges(
+                ical_text
+            )
+
+            print(
+                f"{input_path.name}: "
+                f"{len(ranges)} Zeiträume erkannt."
+            )
+
+            all_booked_ranges.extend(ranges)
+
+        merged_ranges = merge_ranges(
+            all_booked_ranges
+        )
+
+        output = build_output(
+            merged_ranges
+        )
+
+        output_path.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
         output_path.write_text(
             json.dumps(
                 output,
@@ -232,11 +275,19 @@ def main() -> None:
             encoding="utf-8",
         )
 
-    except (OSError, UnicodeError, ValueError) as error:
-        raise SystemExit(f"Fehler: {error}") from error
+    except (
+        OSError,
+        UnicodeError,
+        ValueError,
+    ) as error:
+        raise SystemExit(
+            f"Fehler: {error}"
+        ) from error
 
     print(
-        f"{len(booked_ranges)} belegte Zeiträume wurden in "
+        f"Insgesamt wurden "
+        f"{len(merged_ranges)} zusammengeführte "
+        f"Belegungszeiträume in "
         f"{output_path} gespeichert."
     )
 

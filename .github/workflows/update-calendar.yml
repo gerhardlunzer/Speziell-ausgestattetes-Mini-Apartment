@@ -19,39 +19,68 @@ jobs:
 
     steps:
       - name: Repository laden
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Python einrichten
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
-      - name: Airbnb-Kalender herunterladen
+      - name: Buchungskalender herunterladen
         env:
           AIRBNB_ICAL_URL: ${{ secrets.AIRBNB_ICAL_URL }}
+          BOOKING_ICAL_URL: ${{ secrets.BOOKING_ICAL_URL }}
+          VRBO_ICAL_URL: ${{ secrets.VRBO_ICAL_URL }}
         run: |
-          if [ -z "$AIRBNB_ICAL_URL" ]; then
-            echo "Das Secret AIRBNB_ICAL_URL fehlt."
-            exit 1
-          fi
+          set -e
 
-          curl \
-            --fail \
-            --silent \
-            --show-error \
-            --location \
+          download_calendar() {
+            name="$1"
+            url="$2"
+            output="$3"
+
+            if [ -z "$url" ]; then
+              echo "Das Secret für $name fehlt."
+              exit 1
+            fi
+
+            echo "$name wird heruntergeladen ..."
+
+            curl \
+              --fail \
+              --silent \
+              --show-error \
+              --location \
+              "$url" \
+              --output "$output"
+
+            if ! grep -q "BEGIN:VCALENDAR" "$output"; then
+              echo "$name liefert keinen gültigen iCalendar."
+              exit 1
+            fi
+          }
+
+          download_calendar \
+            "Airbnb" \
             "$AIRBNB_ICAL_URL" \
-            --output /tmp/airbnb-calendar.ics
+            "/tmp/airbnb-calendar.ics"
 
-          if ! grep -q "BEGIN:VCALENDAR" /tmp/airbnb-calendar.ics; then
-            echo "Die heruntergeladene Datei ist kein gültiger Kalender."
-            exit 1
-          fi
+          download_calendar \
+            "Booking.com" \
+            "$BOOKING_ICAL_URL" \
+            "/tmp/booking-calendar.ics"
+
+          download_calendar \
+            "Vrbo" \
+            "$VRBO_ICAL_URL" \
+            "/tmp/vrbo-calendar.ics"
 
       - name: Verfügbarkeitsdatei erzeugen
         run: |
           python scripts/update_availability.py \
             /tmp/airbnb-calendar.ics \
+            /tmp/booking-calendar.ics \
+            /tmp/vrbo-calendar.ics \
             data/availability.json
 
       - name: Änderungen speichern
