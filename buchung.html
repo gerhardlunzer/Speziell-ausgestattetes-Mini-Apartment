@@ -38,6 +38,10 @@
         voraussichtlich noch verfügbar ist.
     </p>
 
+    <p class="minimum-stay">
+    Mindestaufenthalt: <strong>2 Nächte</strong>
+</p>
+
     <div class="availability-legend">
 
         <span>
@@ -71,6 +75,115 @@
 
 </section>
 
+<section class="direct-request-section">
+
+    <h2>Direktbuchung anfragen</h2>
+
+    <p class="direct-request-intro">
+        Wählen Sie Ihren gewünschten Zeitraum aus.
+        Wir prüfen Ihre Angaben automatisch und bereiten
+        anschließend eine WhatsApp-Anfrage vor.
+    </p>
+
+    <form id="directBookingForm">
+
+        <div class="booking-form-grid">
+
+            <label>
+                Anreise
+                <input
+                    type="date"
+                    id="arrivalDate"
+                    name="arrival"
+                    required
+                >
+            </label>
+
+            <label>
+                Abreise
+                <input
+                    type="date"
+                    id="departureDate"
+                    name="departure"
+                    required
+                >
+            </label>
+
+            <label>
+                Gäste
+                <select
+                    id="guestCount"
+                    name="guests"
+                    required
+                >
+                    <option value="">Bitte auswählen</option>
+                    <option value="1">1 Gast</option>
+                    <option value="2">2 Gäste</option>
+                </select>
+            </label>
+
+            <label>
+                Hunde
+                <select
+                    id="dogCount"
+                    name="dogs"
+                >
+                    <option value="0">Keine Hunde</option>
+                    <option value="1">1 Hund</option>
+                    <option value="2">2 Hunde</option>
+                    </select>
+            </label>
+
+        </div>
+
+        <label class="booking-form-full">
+            Ihr Name
+            <input
+                type="text"
+                id="guestName"
+                name="name"
+                autocomplete="name"
+                maxlength="80"
+                required
+            >
+        </label>
+
+        <label class="booking-form-full">
+            Nachricht oder besondere Wünsche
+            <textarea
+                id="bookingMessage"
+                name="message"
+                rows="4"
+                maxlength="800"
+                placeholder="Zum Beispiel Fragen zum Aufenthalt oder zu Ihren Hunden …"
+            ></textarea>
+        </label>
+
+        <div
+            id="bookingFormMessage"
+            class="booking-form-message"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+        <button
+            type="submit"
+            class="button whatsapp direct-request-button"
+        >
+            <i class="fa-brands fa-whatsapp"></i>
+            Direktanfrage vorbereiten
+        </button>
+
+        <p class="direct-request-note">
+            Die Anfrage ist unverbindlich. Eine Reservierung wird
+            erst nach unserer persönlichen Bestätigung und der
+            vereinbarten Vorauszahlung verbindlich.
+        </p>
+
+    </form>
+
+</section>
+
 <h2>Check-in</h2>
 
 <p>
@@ -96,6 +209,27 @@ Wir bitten Sie, das Apartment am Abreisetag bis
 Das Apartment ist für maximal
 <strong>2 Personen</strong> ausgelegt.
 
+</p>
+
+<h2>Mindestaufenthalt</h2>
+
+<p>
+    Der Mindestaufenthalt beträgt
+    <strong>2 Nächte</strong>.
+</p>
+
+<h2>Buchungsfrist</h2>
+
+<p>
+    Eine Buchung ist bis spätestens
+    <strong>24 Stunden vor der geplanten Anreise</strong>
+    möglich.
+</p>
+
+<p class="advance-booking">
+    Buchungen sind bis spätestens
+    <strong>24 Stunden vor der Anreise</strong>
+    möglich.
 </p>
 
 <h2>WLAN</h2>
@@ -206,5 +340,6 @@ stehen wir Ihnen gerne telefonisch oder per E-Mail zur Verfügung.
 
 </main>
 <script src="js/booking-calendar.js"></script>
+<script src="js/direct-booking.js"></script>
 </body>
 </html>
