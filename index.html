@@ -274,6 +274,134 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
 </section>
 
+<section class="location-section">
+
+    <h2>📍 Lage & Umgebung</h2>
+
+    <p class="location-intro">
+        Das speziell ausgestattete Mini-Apartment befindet sich in
+        <strong>7212 Forchtenstein im Burgenland</strong>,
+        nur wenige Minuten von der
+        <strong>Burg Forchtenstein</strong> entfernt.
+    </p>
+
+    <div class="location-grid">
+
+        <div class="location-card">
+
+            <h3> 
+                <span class="card-icon">🏰</span>
+                <span class="card-title">Sehenswert</span>
+                </h3>
+
+            <ul>
+                <li>Burg Forchtenstein</li>
+                <li>Schloss Esterházy</li>
+                <li>Altstadt Rust</li>
+                <li>Heurige in der Region</li>
+            </ul>
+
+        </div>
+
+        <div class="location-card">
+
+            <h3>
+                <span class="card-icon">🌿</span>
+                <span class="card-title">Natur & Freizeit</span>
+                </h3>
+
+            <ul>
+                <li>Rosaliengebirge</li>
+                <li>Badesee Forchtenstein</li>
+                <li>Wanderwege</li>
+                <li>Radwege</li>
+                <li>Neusiedler See</li>
+            </ul>
+
+        </div>
+
+        <div class="location-card">
+
+            <h3>
+                <span class="card-icon">🚗</span>
+                <span class="card-title">Für Ihren Aufenthalt</span>
+                </h3>
+
+            <ul>
+                <li>kostenloser Parkplatz</li>
+                <li>persönlicher Empfang</li>
+                <li>ruhige Wohnlage</li>
+                <li>Direktbuchung möglich</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <p class="route-button">
+
+        <a
+            href="https://www.google.com/maps/dir/?api=1&destination=Stauseestra%C3%9Fe+120,+7212+Forchtenstein"
+            target="_blank"
+            rel="noopener"
+            class="button">
+
+            📍 Route mit Google Maps planen
+
+        </a>
+
+    </p>
+
+    <div class="location-address">
+
+        <strong>Speziell ausgestattetes Mini-Apartment</strong><br>
+
+        Stauseestraße 120<br>
+
+        7212 Forchtenstein<br>
+
+        Burgenland · Österreich
+
+    </div>
+
+<div class="map-section">
+
+    <button
+        type="button"
+        id="showMapButton"
+        class="map-toggle-button"
+        aria-controls="googleMapContainer"
+        aria-expanded="false"
+    >
+        🗺️ Karte anzeigen
+    </button>
+
+    <p class="map-privacy-note">
+        Google Maps wird erst nach Ihrem Klick geladen.
+        Dabei können Daten an Google übertragen werden.
+    </p>
+
+    <div
+        id="googleMapContainer"
+        class="google-map-container"
+        hidden
+    >
+
+        <iframe
+            id="googleMapFrame"
+            title="Google Maps – Lage des Mini-Apartments in Forchtenstein"
+            data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2684.7871043573946!2d16.350645876657236!3d47.70797067119919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c3208ec4cd83d%3A0x62d7e4065697e61f!2sStauseestra%C3%9Fe%20120%2C%207212%20Forchtenstein!5e0!3m2!1sde!2sat!4v1785612401849!5m2!1sde!2sat"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+        ></iframe>
+
+    </div>
+
+</div>
+    
+</section>
+
 <section class="anreise fade">
 
     <div class="container">
@@ -395,6 +523,8 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
 
 <script src="js/script.js"></script>
+
+<script src="js/google-map.js"></script>
 
 </body>
 </html>
