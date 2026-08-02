@@ -673,7 +673,7 @@ html{
 
 }
 
-{.info-page
+.info-page{
 
     background:white;
 
@@ -967,8 +967,6 @@ footer p{
     color:#c8a24b;
     margin-bottom:12px;
 }
-<div class="highlight-card">
-
 
 .highlight-card h3{
 
@@ -1087,10 +1085,6 @@ footer p{
     opacity:1;
 
 }
-
-<p>
-    © <span id="year"></span> Speziell ausgestattetes Mini-Apartment
-</p>
 
 .welcome-divider{
 
@@ -1916,9 +1910,9 @@ footer p{
 
 .location-address{
 
-    max-width:500px;
+    max-width:420px;
 
-    margin:0 auto;
+    margin:50px auto;
 
     padding:20px 24px;
 
@@ -2069,3 +2063,172 @@ footer p{
     }
 
 }
+
+.arrival-intro{
+
+    max-width:720px;
+
+    margin:-14px auto 28px;
+
+    color:#555;
+
+    line-height:1.6;
+
+    text-align:center;
+
+}
+
+/* ==================================================
+   VERFÜGBARKEIT & DIREKTBUCHUNG AUF DER STARTSEITE
+   ================================================== */
+
+.home-booking-section{
+
+    margin:70px auto;
+
+    padding:55px 24px;
+
+    background:#f7faf8;
+
+    text-align:center;
+
+}
+
+.home-booking-section > h2{
+
+    margin:0 0 12px;
+
+    color:#2f5e48;
+
+}
+
+.direct-booking-slogan{
+
+    margin:0 auto 55px;
+
+    color:#555;
+
+    font-size:1.05rem;
+
+}
+
+.booking-rules{
+
+    max-width:720px;
+
+    margin:0 auto 38px;
+
+    padding:22px 26px;
+
+    border:1px solid rgba(47,94,72,.18);
+
+    border-radius:14px;
+
+    background:rgba(63,155,95,.10);
+
+    text-align:left;
+
+}
+
+.booking-rules h3{
+
+    margin:0 0 14px;
+
+    color:#2f5e48;
+
+    text-align:center;
+
+}
+
+.booking-rules ul{
+
+    margin:0;
+
+    padding-left:24px;
+
+    line-height:1.8;
+
+}
+
+.booking-rules li::marker{
+
+    color:#3f9b5f;
+
+}
+
+@media(max-width:700px){
+
+    .home-booking-section{
+
+        padding:42px 14px;
+
+    }
+
+    .booking-rules{
+
+        padding:20px;
+
+    }
+
+}
+
+/* Aufklappbarer Buchungsbereich */
+.booking-toggle-button{
+
+    display:block;
+
+    width:min(1200px,100%);
+
+    margin:0 auto 30px;
+
+    padding:20px 24px;
+
+    border:0;
+
+    border-radius:16px;
+
+    background:#2f654d;
+
+    color:#fff;
+
+    font:inherit;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        background .2s;
+
+}
+
+.booking-details{
+
+    margin-top:35px;
+
+}
+
+.booking-details[hidden]{
+
+    display:none !important;
+
+}
+
+.booking-toggle-button:hover{
+
+    transform:translateY(-2px);
+
+    background:#285b45;
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,.15);
+
+}
+

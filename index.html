@@ -338,21 +338,7 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
     </div>
 
-    <p class="route-button">
-
-        <a
-            href="https://www.google.com/maps/dir/?api=1&destination=Stauseestra%C3%9Fe+120,+7212+Forchtenstein"
-            target="_blank"
-            rel="noopener"
-            class="button">
-
-            📍 Route mit Google Maps planen
-
-        </a>
-
-    </p>
-
-    <div class="location-address">
+        <div class="location-address">
 
         <strong>Speziell ausgestattetes Mini-Apartment</strong><br>
 
@@ -408,6 +394,11 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
         <h2>Anreise</h2>
 
+        <p class="arrival-intro">
+        Die folgenden Fotos helfen Ihnen, die Einfahrt und den Parkplatz
+        leichter zu erkennen.
+</p>
+
         <div class="anreise-bilder">
 
             <img src="images/anreise1.jpeg"
@@ -431,20 +422,211 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 
 </section>
 
-<section class="calendar-section fade">
 
-    <div class="container">
 
-        <div class="calendar-toggle">
-            <i class="fa-regular fa-calendar"></i>
-            Verfügbarkeit prüfen
-        </div>
+<section id="verfuegbarkeit" class="home-booking-section">
 
-        <div class="calendar-wrapper">
+    <button
+        type="button"
+        id="bookingToggleButton"
+        class="booking-toggle-button"
+        aria-controls="bookingDetails"
+        aria-expanded="false"
+    >
+        📅 Verfügbarkeit & Direktbuchung
+    </button>
 
-            <div id="calendar"></div>
+    <p class="direct-booking-slogan">
+        Direkt beim Gastgeber buchen – ohne Vermittlungsplattform.
+    </p>
 
-        </div>
+    <div class="booking-rules">
+
+        <h3>Vor Ihrer Anfrage</h3>
+
+        <ul>
+            <li>
+                Mindestaufenthalt:
+                <strong>2 Nächte</strong>
+            </li>
+
+            <li>
+                Buchung mindestens
+                <strong>24 Stunden vor der Anreise</strong>
+            </li>
+
+            <li>
+                Belegung mit maximal
+                <strong>2 Gästen</strong>
+            </li>
+
+            <li>
+                Eine Reservierung wird erst nach persönlicher
+                Bestätigung verbindlich.
+            </li>
+        </ul>
+
+    </div>
+
+    <div
+        id="bookingDetails"
+        class="booking-details"
+        hidden
+    >
+
+        <section class="availability-section">
+
+            <h2>Verfügbarkeit prüfen</h2>
+
+            <p class="availability-intro">
+                Prüfen Sie hier, ob Ihr gewünschter Aufenthaltszeitraum
+                voraussichtlich noch verfügbar ist.
+            </p>
+
+            <p class="minimum-stay">
+                Mindestaufenthalt:
+                <strong>2 Nächte</strong>
+            </p>
+
+            <div class="availability-legend">
+
+                <span>
+                    <span class="availability-dot available"></span>
+                    Frei
+                </span>
+
+                <span>
+                    <span class="availability-dot occupied"></span>
+                    Bereits belegt
+                </span>
+
+            </div>
+
+            <div id="booking-calendar">
+
+                <p class="calendar-loading">
+                    Der Verfügbarkeitskalender wird vorbereitet …
+                </p>
+
+            </div>
+
+            <p class="availability-note">
+                Die Verfügbarkeit wird regelmäßig mit den
+                Buchungskalendern abgeglichen.
+                Eine Reservierung wird erst nach persönlicher
+                Bestätigung verbindlich.
+            </p>
+
+        </section>
+
+        <section class="direct-request-section">
+
+            <h2>Direktbuchung anfragen</h2>
+
+            <p class="direct-request-intro">
+                Wählen Sie Ihren gewünschten Zeitraum aus.
+                Wir prüfen Ihre Angaben automatisch und bereiten
+                anschließend eine WhatsApp-Anfrage vor.
+            </p>
+
+            <form id="directBookingForm">
+
+                <div class="booking-form-grid">
+
+                    <label>
+                        Anreise
+                        <input
+                            type="date"
+                            id="arrivalDate"
+                            name="arrival"
+                            required
+                        >
+                    </label>
+
+                    <label>
+                        Abreise
+                        <input
+                            type="date"
+                            id="departureDate"
+                            name="departure"
+                            required
+                        >
+                    </label>
+
+                    <label>
+                        Gäste
+                        <select
+                            id="guestCount"
+                            name="guests"
+                            required
+                        >
+                            <option value="">Bitte auswählen</option>
+                            <option value="1">1 Gast</option>
+                            <option value="2">2 Gäste</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Hunde
+                        <select
+                            id="dogCount"
+                            name="dogs"
+                        >
+                            <option value="0">Keine Hunde</option>
+                            <option value="1">1 Hund</option>
+                            <option value="2">2 Hunde</option>
+                        </select>
+                    </label>
+
+                </div>
+
+                <label class="booking-form-full">
+                    Ihr Name
+                    <input
+                        type="text"
+                        id="guestName"
+                        name="name"
+                        autocomplete="name"
+                        maxlength="80"
+                        required
+                    >
+                </label>
+
+                <label class="booking-form-full">
+                    Nachricht oder besondere Wünsche
+                    <textarea
+                        id="bookingMessage"
+                        name="message"
+                        rows="4"
+                        maxlength="800"
+                        placeholder="Zum Beispiel Fragen zum Aufenthalt oder zu Ihren Hunden …"
+                    ></textarea>
+                </label>
+
+                <div
+                    id="bookingFormMessage"
+                    class="booking-form-message"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+                <button
+                    type="submit"
+                    class="button whatsapp direct-request-button"
+                >
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Direktanfrage vorbereiten
+                </button>
+
+                <p class="direct-request-note">
+                    Die Anfrage ist unverbindlich. Eine Reservierung wird
+                    erst nach unserer persönlichen Bestätigung und der
+                    vereinbarten Vorauszahlung verbindlich.
+                </p>
+
+            </form>
+
+        </section>
 
     </div>
 
@@ -467,6 +649,8 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 </section>
 
 </main>
+
+<footer>
 
 <p>
 
@@ -525,6 +709,12 @@ exklusiver Gartenbereich mit wunderschönen Sitzgelegenheiten.
 <script src="js/script.js"></script>
 
 <script src="js/google-map.js"></script>
+
+<script src="js/booking-calendar.js"></script>
+
+<script src="js/direct-booking.js"></script>
+
+<script src="js/booking-toggle.js"></script>
 
 </body>
 </html>
