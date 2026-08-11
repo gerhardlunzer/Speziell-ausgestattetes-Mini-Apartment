@@ -41,26 +41,29 @@ document.getElementById("nameText").textContent =
 
     const container = document.getElementById(containerId);
 
-    bilder.forEach((datei, index) => {
+    bilder.forEach((bild, index) => {
 
         container.innerHTML += `
-<a href="images/${datei}.jpg"
-   class="glightbox"
-   data-gallery="${containerId}"
-   ${index >= 4 ? 'style="display:none"' : ''}>
-    <img
-        src="thumbs/${datei}.jpg"
-        alt="${containerId === 'apartment-gallery'
-            ? 'Einblick in das Mini-Apartment in Forchtenstein'
-            : 'Außenbereich, Gästegarten und Natur rund um das Mini-Apartment in Forchtenstein'}"
-        loading="lazy">
-</a>`;
+            <a
+                href="images/${bild.image}.jpg"
+                class="glightbox"
+                data-gallery="${containerId}"
+                ${index >= 4 ? 'style="display:none"' : ''}
+            >
+                <img
+                    src="thumbs/${containerId === 'apartmentGallery' ? 'a' : 'o'}${String(index + 1).padStart(2, '0')}.jpg"
+                    alt="${bild.alt}"
+                    loading="lazy"
+                >
+            </a>
+        `;
 
     });
+
 }
 
     galerieErzeugen("apartmentGallery", gallery.apartment);
-        galerieErzeugen("outsideGallery", gallery.outside);
+    galerieErzeugen("outsideGallery", gallery.outside);
    
     const lightbox = GLightbox({
     touchNavigation: true,
