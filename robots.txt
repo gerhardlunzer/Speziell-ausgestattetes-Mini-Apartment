@@ -3,3 +3,9 @@ User-agent: *
 Allow: /
 
 Sitemap: https://gerhardlunzer.github.io/Speziell-ausgestattetes-Mini-Apartment/sitemap.xml
+
+User-agent: *
+Allow: /
+Disallow: /Speziell-ausgestattetes-Mini-Apartment/admin/
+
+Sitemap: https://gerhardlunzer.github.io/Speziell-ausgestattetes-Mini-Apartment/sitemap.xml
