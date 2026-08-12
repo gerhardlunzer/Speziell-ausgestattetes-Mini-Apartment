@@ -99,61 +99,6 @@ lightbox.on("close", () => {
 
 });
 
-    const calendarEl = document.getElementById("calendar");
-    
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-
-        initialView: "dayGridMonth",
-        locale: "de",
-        firstDay: 1,
-        height: "auto",
-
-        events: [
-
-            {
-                title: "Belegt",
-                start: "2026-08-12",
-                end: "2026-08-16",
-                color: "#d9534f"
-            },
-
-            {
-                title: "Belegt",
-                start: "2026-08-24",
-                end: "2026-08-28",
-                color: "#d9534f"
-            }
-
-        ]
-
-    });
-    
-    calendar.render();
-    
-    const toggle = document.querySelector(".calendar-toggle");
-    
-    const wrapper = document.querySelector(".calendar-wrapper");
-
-    toggle.addEventListener("click", function () {
-
-        wrapper.classList.toggle("open");
-
-        if (wrapper.classList.contains("open")) {
-
-            toggle.innerHTML =
-                '<i class="fa-regular fa-calendar"></i> Verfügbarkeit ausblenden';
-
-        } else {
-
-            toggle.innerHTML =
-                '<i class="fa-regular fa-calendar"></i> Verfügbarkeit prüfen';
-
-        }
-
-        calendar.updateSize();
-
-    });
-
 }
 
 // Fade-In beim Scrollen
