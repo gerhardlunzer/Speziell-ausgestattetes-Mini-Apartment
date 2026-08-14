@@ -8,10 +8,15 @@ async function init() {
     
     const gallery = await galerieDatei.json();
     
-    document.getElementById("title").textContent = data.config.title;
+const isEnglish = document.documentElement.lang === "en";
+
+document.getElementById("title").textContent =
+    isEnglish
+        ? "Specially Equipped Mini Apartment"
+        : data.config.title;
 
 document.getElementById("nameText").textContent =
-    "Ihr Ansprechpartner: " + data.config.name;
+    (isEnglish ? "Your host: " : "Ihr Ansprechpartner: ") + data.config.name;
 
     document.getElementById("addressText").textContent =
         data.config.address;
@@ -52,7 +57,7 @@ document.getElementById("nameText").textContent =
             >
                 <img
                     src="thumbs/${containerId === 'apartmentGallery' ? 'a' : 'o'}${String(index + 1).padStart(2, '0')}.jpg"
-                    alt="${bild.alt}"
+                    alt="${isEnglish && bild.alt_en ? bild.alt_en : bild.alt}"
                     loading="lazy"
                 >
             </a>
@@ -69,34 +74,6 @@ document.getElementById("nameText").textContent =
     touchNavigation: true,
     loop: true,
     zoomable: true
-});
-
-const counter = document.createElement("div");
-
-counter.className = "my-counter";
-
-document.body.appendChild(counter);
-
-lightbox.on("slide_changed", ({ current }) => {
-
-    const total = document.querySelectorAll(".glightbox").length;
-
-    counter.textContent = `${current.slideIndex + 1} / ${total}`;
-
-});
-
-lightbox.on("open", () => {
-
-    const total = document.querySelectorAll(".glightbox").length;
-
-    counter.textContent = `1 / ${total}`;
-
-});
-
-lightbox.on("close", () => {
-
-    counter.textContent = "";
-
 });
 
 }

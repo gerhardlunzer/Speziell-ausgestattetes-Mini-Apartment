@@ -1,4 +1,5 @@
 "use strict";
+const isEnglish = document.documentElement.lang === "en";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -30,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             button.textContent =
-                "🗺️ Karte anzeigen";
+                isEnglish
+        ? "🗺️ Show map"
+        : "🗺️ Karte anzeigen";
 
             return;
         }
@@ -55,7 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         button.textContent =
-            "🗺️ Karte ausblenden";
+            isEnglish
+        ? "🗺️ Hide map"
+        : "🗺️ Karte ausblenden";
 
     });
 
