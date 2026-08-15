@@ -1,5 +1,7 @@
 "use strict";
-const isEnglish = document.documentElement.lang === "en";
+
+const isEnglishToggle =
+    document.documentElement.lang === "en";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -26,13 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         button.textContent = isOpen
-            ? (isEnglish
-        ? "📅 Availability & Direct Booking"
-        : "📅 Verfügbarkeit & Direktbuchung")
-    : (isEnglish
-        ? "📅 Close Availability & Direct Booking"
-        : "📅 Verfügbarkeit & Direktbuchung schließen");
-        
+            ? (
+                isEnglishToggle
+                    ? "📅 Availability & Direct Booking"
+                    : "📅 Verfügbarkeit & Direktbuchung"
+            )
+            : (
+                isEnglishToggle
+                    ? "📅 Close Availability & Direct Booking"
+                    : "📅 Verfügbarkeit & Direktbuchung schließen"
+            );
+
         if (!isOpen) {
             details.scrollIntoView({
                 behavior: "smooth",

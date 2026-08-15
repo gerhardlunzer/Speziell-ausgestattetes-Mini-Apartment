@@ -1,7 +1,12 @@
 "use strict";
-const isEnglish = document.documentElement.lang === "en";
 
-document.addEventListener("DOMContentLoaded", initBookingCalendar);
+const isEnglishCalendar =
+    document.documentElement.lang === "en";
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initBookingCalendar
+);
 
 async function initBookingCalendar() {
 
@@ -14,9 +19,11 @@ async function initBookingCalendar() {
 
     calendarContainer.innerHTML = `
         <p class="calendar-loading">
-            ${isEnglish
-            ? "Availability is being loaded …"
-            : "Verfügbarkeit wird geladen …"}
+            ${
+                isEnglishCalendar
+                    ? "Availability is being loaded …"
+                    : "Verfügbarkeit wird geladen …"
+            }
         </p>
     `;
 
@@ -61,15 +68,19 @@ async function initBookingCalendar() {
         calendarContainer.innerHTML = `
             <div class="calendar-error">
                 <strong>
-                    ${isEnglish
-                ? "The availability calendar could not be loaded at the moment."
-                : "Der Verfügbarkeitskalender konnte momentan nicht geladen werden."}
-        </strong>
+                    ${
+                        isEnglishCalendar
+                            ? "The availability calendar could not be loaded at the moment."
+                            : "Der Verfügbarkeitskalender konnte momentan nicht geladen werden."
+                    }
+                </strong>
 
-        <p>
-            ${isEnglish
-                ? "Please try again later or contact us directly."
-                : "Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt."}
+                <p>
+                    ${
+                        isEnglishCalendar
+                            ? "Please try again later or contact us directly."
+                            : "Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt."
+                    }
                 </p>
             </div>
         `;
@@ -95,12 +106,16 @@ function renderCalendar(
 
     const statusText =
         todayBooked
-            ? (isEnglish
-            ? "The apartment is occupied today."
-            : "Das Apartment ist heute belegt.")
-        : (isEnglish
-            ? "The apartment is currently available today."
-            : "Das Apartment ist heute grundsätzlich verfügbar.");
+            ? (
+                isEnglishCalendar
+                    ? "The apartment is occupied today."
+                    : "Das Apartment ist heute belegt."
+            )
+            : (
+                isEnglishCalendar
+                    ? "The apartment is currently available today."
+                    : "Das Apartment ist heute grundsätzlich verfügbar."
+            );
 
     const lastUpdatedText =
         formatUpdatedAt(updatedAt);
@@ -117,11 +132,13 @@ function renderCalendar(
             lastUpdatedText
                 ? `
                     <p class="calendar-updated">
-                        ${isEnglish
-        ? "Calendar last updated:"
-        : "Kalender zuletzt aktualisiert:"}
-    ${lastUpdatedText}
-    </p>
+                        ${
+                            isEnglishCalendar
+                                ? "Calendar last updated:"
+                                : "Kalender zuletzt aktualisiert:"
+                        }
+                        ${lastUpdatedText}
+                    </p>
                 `
                 : ""
         }
@@ -170,7 +187,8 @@ function createMonth(
 
     const monthTitle =
         new Intl.DateTimeFormat(
-isEnglish ? "en-GB" : "de-AT",            {
+            isEnglishCalendar ? "en-GB" : "de-AT",
+            {
                 month: "long",
                 year: "numeric"
             }
@@ -180,13 +198,13 @@ isEnglish ? "en-GB" : "de-AT",            {
         <h3>${capitalizeFirstLetter(monthTitle)}</h3>
 
         <div class="calendar-weekdays">
-            <span>${isEnglish ? "Mon" : "Mo"}</span>
-    <span>${isEnglish ? "Tue" : "Di"}</span>
-    <span>${isEnglish ? "Wed" : "Mi"}</span>
-    <span>${isEnglish ? "Thu" : "Do"}</span>
-    <span>${isEnglish ? "Fri" : "Fr"}</span>
-    <span>${isEnglish ? "Sat" : "Sa"}</span>
-    <span>${isEnglish ? "Sun" : "So"}</span>
+            <span>${isEnglishCalendar ? "Mon" : "Mo"}</span>
+            <span>${isEnglishCalendar ? "Tue" : "Di"}</span>
+            <span>${isEnglishCalendar ? "Wed" : "Mi"}</span>
+            <span>${isEnglishCalendar ? "Thu" : "Do"}</span>
+            <span>${isEnglishCalendar ? "Fri" : "Fr"}</span>
+            <span>${isEnglishCalendar ? "Sat" : "Sa"}</span>
+            <span>${isEnglishCalendar ? "Sun" : "So"}</span>
         </div>
 
         <div class="calendar-days"></div>
@@ -248,25 +266,37 @@ isEnglish ? "en-GB" : "de-AT",            {
         const booked =
             isDateBooked(date, bookedRanges);
 
-       if (isPast && !isToday) {
+        if (isPast && !isToday) {
 
-    dayElement.classList.add("past");
-    dayElement.title =
-        `${formatDate(date)} – ${isEnglish ? "past" : "vergangen"}`;
+            dayElement.classList.add("past");
+            dayElement.title =
+                `${formatDate(date)} – ${
+                    isEnglishCalendar
+                        ? "past"
+                        : "vergangen"
+                }`;
 
-} else if (booked) {
+        } else if (booked) {
 
-    dayElement.classList.add("booked");
-    dayElement.title =
-        `${formatDate(date)} – ${isEnglish ? "already booked" : "bereits belegt"}`;
+            dayElement.classList.add("booked");
+            dayElement.title =
+                `${formatDate(date)} – ${
+                    isEnglishCalendar
+                        ? "already booked"
+                        : "bereits belegt"
+                }`;
 
-} else {
+        } else {
 
-    dayElement.classList.add("free");
-    dayElement.title =
-        `${formatDate(date)} – ${isEnglish ? "available" : "grundsätzlich frei"}`;
+            dayElement.classList.add("free");
+            dayElement.title =
+                `${formatDate(date)} – ${
+                    isEnglishCalendar
+                        ? "available"
+                        : "grundsätzlich frei"
+                }`;
 
-}
+        }
 
         if (isToday) {
             dayElement.classList.add("today");
@@ -350,7 +380,8 @@ function isSameDay(firstDate, secondDate) {
 function formatDate(date) {
 
     return new Intl.DateTimeFormat(
-    isEnglish ? "en-GB" : "de-AT",        {
+        isEnglishCalendar ? "en-GB" : "de-AT",
+        {
             weekday: "long",
             day: "2-digit",
             month: "long",
@@ -375,7 +406,8 @@ function formatUpdatedAt(updatedAt) {
     }
 
     return new Intl.DateTimeFormat(
-    isEnglish ? "en-GB" : "de-AT",        {
+        isEnglishCalendar ? "en-GB" : "de-AT",
+        {
             day: "2-digit",
             month: "2-digit",
             year: "numeric",

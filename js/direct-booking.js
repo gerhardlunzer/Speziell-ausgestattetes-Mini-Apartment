@@ -1,5 +1,7 @@
 "use strict";
-const isEnglish = document.documentElement.lang === "en";
+
+const isEnglishBooking =
+    document.documentElement.lang === "en";
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -81,14 +83,14 @@ async function initDirectBooking() {
         );
 
         showMessage(
-    messageElement,
-    isEnglish
-        ? "The direct booking request cannot be loaded at the moment. " +
-          "Please contact us by phone or WhatsApp."
-        : "Die Direktanfrage kann momentan nicht geladen werden. " +
-          "Bitte kontaktieren Sie uns telefonisch oder per WhatsApp.",
-    "error"
-);
+            messageElement,
+            isEnglishBooking
+                ? "The direct booking request cannot be loaded at the moment. " +
+                  "Please contact us by phone or WhatsApp."
+                : "Die Direktanfrage kann momentan nicht geladen werden. " +
+                  "Bitte kontaktieren Sie uns telefonisch oder per WhatsApp.",
+            "error"
+        );
 
         form.querySelector(
             'button[type="submit"]'
@@ -194,66 +196,66 @@ async function initDirectBooking() {
                 );
 
             const dogsText =
-    dogs === "0"
-        ? (isEnglish ? "none" : "keine")
-        : dogs;
+                dogs === "0"
+                    ? (isEnglishBooking ? "none" : "keine")
+                    : dogs;
 
-const messageLines =
-    isEnglish
-        ? [
-            "Hello!",
-            "",
-            "I am interested in booking the mini apartment in Forchtenstein directly.",
-            "",
-            `Name: ${name}`,
-            `Arrival: ${formatDateKey(arrival)}`,
-            `Departure: ${formatDateKey(departure)}`,
-            `Nights: ${numberOfNights}`,
-            `Guests: ${guests}`,
-            `Dogs: ${dogsText}`
-        ]
-        : [
-            "Guten Tag!",
-            "",
-            "ich interessiere mich für eine Direktbuchung " +
-            "des Mini-Apartments in Forchtenstein.",
-            "",
-            `Name: ${name}`,
-            `Anreise: ${formatDateKey(arrival)}`,
-            `Abreise: ${formatDateKey(departure)}`,
-            `Übernachtungen: ${numberOfNights}`,
-            `Gäste: ${guests}`,
-            `Hunde: ${dogsText}`
-        ];
+            const messageLines =
+                isEnglishBooking
+                    ? [
+                        "Hello!",
+                        "",
+                        "I am interested in booking the mini apartment in Forchtenstein directly.",
+                        "",
+                        `Name: ${name}`,
+                        `Arrival: ${formatDateKey(arrival)}`,
+                        `Departure: ${formatDateKey(departure)}`,
+                        `Nights: ${numberOfNights}`,
+                        `Guests: ${guests}`,
+                        `Dogs: ${dogsText}`
+                    ]
+                    : [
+                        "Guten Tag!",
+                        "",
+                        "ich interessiere mich für eine Direktbuchung " +
+                        "des Mini-Apartments in Forchtenstein.",
+                        "",
+                        `Name: ${name}`,
+                        `Anreise: ${formatDateKey(arrival)}`,
+                        `Abreise: ${formatDateKey(departure)}`,
+                        `Übernachtungen: ${numberOfNights}`,
+                        `Gäste: ${guests}`,
+                        `Hunde: ${dogsText}`
+                    ];
 
-if (personalMessage) {
+            if (personalMessage) {
 
-    messageLines.push(
-        "",
-        isEnglish ? "Message:" : "Nachricht:",
-        personalMessage
-    );
-}
+                messageLines.push(
+                    "",
+                    isEnglishBooking ? "Message:" : "Nachricht:",
+                    personalMessage
+                );
+            }
 
-if (isEnglish) {
+            if (isEnglishBooking) {
 
-    messageLines.push(
-        "",
-        "Please check availability and send me a direct booking offer.",
-        "",
-        "Thank you!"
-    );
+                messageLines.push(
+                    "",
+                    "Please check availability and send me a direct booking offer.",
+                    "",
+                    "Thank you!"
+                );
 
-} else {
+            } else {
 
-    messageLines.push(
-        "",
-        "Bitte prüfen Sie die Verfügbarkeit " +
-        "und senden Sie mir ein Direktangebot.",
-        "",
-        "Vielen Dank!"
-    );
-}         
+                messageLines.push(
+                    "",
+                    "Bitte prüfen Sie die Verfügbarkeit " +
+                    "und senden Sie mir ein Direktangebot.",
+                    "",
+                    "Vielen Dank!"
+                );
+            }
 
             const whatsappUrl =
                 `https://wa.me/${whatsappNumber}` +
@@ -262,14 +264,14 @@ if (isEnglish) {
                 )}`;
 
             showMessage(
-    messageElement,
-    isEnglish
-        ? "According to the calendar, the selected dates are currently available. " +
-          "WhatsApp will now open with your prepared request."
-        : "Der Zeitraum ist laut Kalender grundsätzlich frei. " +
-          "WhatsApp wird nun mit Ihrer vorbereiteten Anfrage geöffnet.",
-    "success"
-);
+                messageElement,
+                isEnglishBooking
+                    ? "According to the calendar, the selected dates are currently available. " +
+                      "WhatsApp will now open with your prepared request."
+                    : "Der Zeitraum ist laut Kalender grundsätzlich frei. " +
+                      "WhatsApp wird nun mit Ihrer vorbereiteten Anfrage geöffnet.",
+                "success"
+            );
 
             window.open(
                 whatsappUrl,
@@ -288,17 +290,17 @@ function validateRequest(
 ) {
 
     if (!arrival || !departure) {
-        return isEnglish
-        ? "Please select your arrival and departure dates."
-        : "Bitte wählen Sie Anreise und Abreise aus.";
-}
+        return isEnglishBooking
+            ? "Please select your arrival and departure dates."
+            : "Bitte wählen Sie Anreise und Abreise aus.";
+    }
 
     if (!meetsAdvanceBookingDeadline(arrival)) {
-    return isEnglish
-        ? "Arrival must be booked at least 24 hours in advance."
-        : "Die Anreise muss mindestens 24 Stunden " +
-          "im Voraus gebucht werden.";
-}
+        return isEnglishBooking
+            ? "Arrival must be booked at least 24 hours in advance."
+            : "Die Anreise muss mindestens 24 Stunden " +
+              "im Voraus gebucht werden.";
+    }
 
     const nights =
         differenceInCalendarDays(
@@ -307,11 +309,11 @@ function validateRequest(
         );
 
     if (nights < 2) {
-        return isEnglish
-        ? "The minimum stay is 2 nights. " +
-          "Please select a later departure date."
-        : "Der Mindestaufenthalt beträgt 2 Nächte. " +
-          "Bitte wählen Sie ein späteres Abreisedatum.";
+        return isEnglishBooking
+            ? "The minimum stay is 2 nights. " +
+              "Please select a later departure date."
+            : "Der Mindestaufenthalt beträgt 2 Nächte. " +
+              "Bitte wählen Sie ein späteres Abreisedatum.";
     }
 
     const overlap =
@@ -324,12 +326,12 @@ function validateRequest(
         });
 
     if (overlap) {
-        return isEnglish
-        ? "Unfortunately, the selected dates overlap with an existing booking. " +
-          "Please choose different dates."
-        : "Der gewählte Zeitraum überschneidet sich leider " +
-          "mit einer bestehenden Buchung. " +
-          "Bitte wählen Sie einen anderen Zeitraum.";
+        return isEnglishBooking
+            ? "Unfortunately, the selected dates overlap with an existing booking. " +
+              "Please choose different dates."
+            : "Der gewählte Zeitraum überschneidet sich leider " +
+              "mit einer bestehenden Buchung. " +
+              "Bitte wählen Sie einen anderen Zeitraum.";
     }
 
     return "";
@@ -348,10 +350,6 @@ function meetsAdvanceBookingDeadline(
         .split("-")
         .map(Number);
 
-    /*
-     * Die geplante Anreise wird mit der Check-in-Zeit
-     * um 15:00 Uhr verglichen.
-     */
     const arrivalDateTime =
         new Date(
             year,
@@ -499,7 +497,8 @@ function formatDateKey(dateKey) {
         );
 
     return new Intl.DateTimeFormat(
-    isEnglish ? "en-GB" : "de-AT",        {
+        isEnglishBooking ? "en-GB" : "de-AT",
+        {
             weekday: "long",
             day: "2-digit",
             month: "2-digit",
