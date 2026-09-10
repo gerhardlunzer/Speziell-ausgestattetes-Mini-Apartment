@@ -26,6 +26,9 @@ async function initDirectBooking() {
     const messageElement =
         document.getElementById("bookingFormMessage");
 
+    const termsCheckbox =
+        document.getElementById("bookingTermsAccepted");
+
     let bookedRanges = [];
     let whatsappNumber = "";
 
@@ -145,6 +148,21 @@ async function initDirectBooking() {
                 return;
             }
 
+            if (!termsCheckbox || !termsCheckbox.checked) {
+
+                showMessage(
+                    messageElement,
+                    isEnglishBooking
+                        ? "Please confirm that you have read and accept the House Rules and Booking Information, including the €190 security deposit and the no-smoking rule inside the apartment."
+                        : "Bitte bestätigen Sie, dass Sie die Hausordnung und Buchungsinformationen gelesen und akzeptiert haben, einschließlich der Kaution von 190 € und des Rauchverbots im Apartment.",
+                    "error"
+                );
+
+                termsCheckbox?.focus();
+
+                return;
+            }
+
             const arrival =
                 arrivalInput.value;
 
@@ -236,6 +254,13 @@ async function initDirectBooking() {
                     personalMessage
                 );
             }
+
+            messageLines.push(
+                "",
+                isEnglishBooking
+                    ? "I confirm that I have read and accept the House Rules and Booking Information, including the €190 security deposit and the no-smoking rule inside the apartment."
+                    : "Ich bestätige, dass ich die Hausordnung und die Buchungsinformationen gelesen und akzeptiert habe, einschließlich der Kaution von 190 € und des Rauchverbots im Apartment."
+            );
 
             if (isEnglishBooking) {
 

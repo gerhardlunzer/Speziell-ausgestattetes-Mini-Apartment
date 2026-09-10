@@ -65,6 +65,7 @@ position:relative;
     min-height:100vh;
 
     background:
+        linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
         url("../images/landschaft.jpg");
 
     background-size:cover;
@@ -97,9 +98,7 @@ position:relative;
 
     margin-bottom:20px;
 
-    text-shadow:
-        0 1px 2px rgba(0,0,0,.75),
-        0 4px 12px rgba(0,0,0,.35);
+    text-shadow:0 3px 12px rgba(0,0,0,.45);
 
 letter-spacing:.5px;
 
@@ -120,8 +119,7 @@ letter-spacing:.5px;
     color:#ffffff;
 
     text-shadow:
-        0 1px 2px rgba(0,0,0,.75),
-        0 4px 12px rgba(0,0,0,.35);
+        0 2px 8px rgba(0,0,0,.45);
 
 }
 
@@ -243,7 +241,7 @@ h2{
 
 .wohnen p{
 
-    font-size:1rem;
+    font-size:1.3rem;
 
     line-height:1,8;
 
@@ -1481,6 +1479,72 @@ body{
 
 }
 
+.booking-consent{
+
+    margin:24px 0 20px;
+
+    padding:18px 20px;
+
+    background:#f4f8f5;
+
+    border:1px solid rgba(47,94,72,.25);
+
+    border-radius:14px;
+
+}
+
+.booking-consent-label{
+
+    display:flex;
+
+    flex-direction:row !important;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    line-height:1.6;
+
+    color:#333 !important;
+
+    font-weight:400 !important;
+
+}
+
+.booking-consent-label input[type="checkbox"]{
+
+    flex:0 0 auto;
+
+    width:20px;
+
+    height:20px;
+
+    margin:3px 0 0;
+
+    accent-color:#2f5e48;
+
+}
+
+.booking-consent-label a{
+
+    color:#2f5e48;
+
+    font-weight:600;
+
+    text-decoration:underline;
+
+}
+
+.booking-consent-label input[type="checkbox"]:focus-visible{
+
+    outline:3px solid rgba(47,143,91,.22);
+
+    outline-offset:2px;
+
+}
+
 .booking-form-message{
 
     display:none;
@@ -2176,94 +2240,4 @@ footer .footer-message{
         font-size: 0.82rem;
     }
 
-}
-/* =====================================================
-   HERO – MOBILE V3
-   Echtes Landschaftsfoto über die gesamte Hero-Höhe.
-   Nur der obere Bereich wird weich in Himmelblau eingeblendet.
-   Desktop bleibt vollständig unverändert.
-   ===================================================== */
-
-@media (max-width:700px){
-
-    .hero{
-        min-height:100vh;
-        position:relative;
-        overflow:hidden;
-
-        /* Originalfoto über die komplette mobile Hero-Fläche */
-        background:
-            linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.12)),
-            url("../images/landschaft.jpg");
-
-        background-size:cover;
-        background-position:center center;
-        background-repeat:no-repeat;
-
-        /* Auf kleinen Displays kein Hintergrund-Zoom */
-        animation:none;
-    }
-
-    /* Himmelblau liegt nur oben und läuft transparent ins echte Foto aus.
-       Dadurch gibt es KEINE harte Kante mehr zwischen Blau und Landschaft. */
-    .hero::before{
-        content:"";
-        position:absolute;
-        inset:0 0 auto 0;
-        height:48%;
-        z-index:0;
-        pointer-events:none;
-
-        background:linear-gradient(
-            to bottom,
-            rgba(169,203,234,.98) 0%,
-            rgba(169,203,234,.94) 38%,
-            rgba(169,203,234,.72) 58%,
-            rgba(169,203,234,.34) 78%,
-            rgba(169,203,234,0) 100%
-        );
-    }
-
-    /* Unten nur ein sehr dezenter Naturgrün-Hauch – das Foto bleibt sichtbar. */
-    .hero::after{
-        content:"";
-        position:absolute;
-        inset:auto 0 0 0;
-        height:24%;
-        z-index:0;
-        pointer-events:none;
-
-        background:linear-gradient(
-            to bottom,
-            rgba(95,143,87,0) 0%,
-            rgba(95,143,87,.08) 55%,
-            rgba(95,143,87,.20) 100%
-        );
-    }
-
-    .hero .overlay{
-        position:relative;
-        z-index:1;
-        width:90%;
-        padding:52px 20px 82px;
-        background:none;
-    }
-
-    .hero h1,
-    .hero .slogan{
-        position:relative;
-        z-index:2;
-        text-shadow:0 3px 10px rgba(0,0,0,.42);
-    }
-
-    .hero .buttons{
-        position:relative;
-        z-index:2;
-        margin-top:14px;
-        gap:18px;
-    }
-
-    .hero .button{
-        width:100%;
-    }
 }
