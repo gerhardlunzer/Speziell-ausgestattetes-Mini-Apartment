@@ -585,25 +585,7 @@ body{
 /* ---------- Hero Animation ---------- */
 
 .hero{
-
-    animation: heroZoom 18s ease-in-out infinite alternate;
-
-}
-
-@keyframes heroZoom{
-
-    from{
-
-        background-size:100%;
-
-    }
-
-    to{
-
-        background-size:108%;
-
-    }
-
+    animation:none;
 }
 
 /* ---------- Fade In ---------- */
