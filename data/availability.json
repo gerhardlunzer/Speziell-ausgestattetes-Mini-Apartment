@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T22:33:37Z",
+  "updatedAt": "2026-10-29T05:46:11Z",
   "booked": [
     {
       "start": "2025-09-25",
@@ -50,12 +50,12 @@
       "endExclusive": "2027-09-03"
     },
     {
-      "start": "2027-10-28",
-      "endExclusive": "2027-10-29"
+      "start": "2027-10-29",
+      "endExclusive": "2027-10-30"
     },
     {
       "start": "2028-03-20",
-      "endExclusive": "2028-04-28"
+      "endExclusive": "2028-04-29"
     }
   ]
 }
