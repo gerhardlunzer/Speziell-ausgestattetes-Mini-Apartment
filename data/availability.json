@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T21:40:04Z",
+  "updatedAt": "2026-11-26T08:14:13Z",
   "booked": [
     {
       "start": "2025-09-25",
@@ -30,6 +30,10 @@
       "endExclusive": "2027-01-24"
     },
     {
+      "start": "2027-02-11",
+      "endExclusive": "2027-02-14"
+    },
+    {
       "start": "2027-07-04",
       "endExclusive": "2027-07-12"
     },
@@ -50,12 +54,12 @@
       "endExclusive": "2027-09-03"
     },
     {
-      "start": "2027-11-25",
-      "endExclusive": "2027-11-26"
+      "start": "2027-11-26",
+      "endExclusive": "2027-11-27"
     },
     {
       "start": "2028-03-20",
-      "endExclusive": "2028-05-25"
+      "endExclusive": "2028-05-26"
     }
   ]
 }
